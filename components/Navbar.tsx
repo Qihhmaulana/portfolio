@@ -8,10 +8,7 @@ export default function Navbar() {
         </div>
 
         <div className="nav-center">
-          <div>
-            <div className="nav-center-logo">maulanafaqih</div>
-            <div className="nav-center-sub">Computer Engineer &amp; IT Specialist</div>
-          </div>
+          <div className="nav-center-logo">maulanafaqih</div>
         </div>
 
         <div className="nav-links nav-links-right">
