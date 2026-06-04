@@ -36,6 +36,7 @@ export default function Home() {
           getDocs(query(collection(db, "projects"),    orderBy("order"))),
           getDocs(query(collection(db, "tools"),       orderBy("order"))),
         ]);
+        console.log("skills:", sSnap.size, "exp:", eSnap.size, "projects:", pSnap.size, "tools:", tSnap.size);
         setSkills(sSnap.docs.map(d => (d.data() as { name: string }).name));
         setExperiences(eSnap.docs.map(d => d.data() as Experience));
         setProjects(pSnap.docs.map(d => d.data() as Project));
