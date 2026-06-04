@@ -47,7 +47,7 @@ export default function HeroSection() {
       <div className="hero-photo-wrap a2">
         <div className="photo-glow" />
         <div className="photo-blob">
-          <Image src="/Profile.png" alt="Maulana Faqih" width={420} height={520} className="blob-photo" />
+          <Image src="/Profile.png" alt="Maulana Faqih" width={420} height={520} className="blob-photo" unoptimized />
         </div>
         <div className="float-dot fd1" />
         <div className="float-dot fd2" />

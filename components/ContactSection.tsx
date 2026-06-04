@@ -92,11 +92,11 @@ export default function ContactSection() {
           <form className="cform" onSubmit={handleSubmit}>
             <div className="cform-field">
               <i className="ti ti-user" />
-              <input type="text" required placeholder="ID Pengirim / Nama" className="cform-input" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
+              <input type="text" name="name" required placeholder="ID Pengirim / Nama" className="cform-input" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
             </div>
             <div className="cform-field">
               <i className="ti ti-mail" />
-              <input type="email" required placeholder="Frekuensi Email" className="cform-input" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+              <input type="email" name="email" required placeholder="Frekuensi Email" className="cform-input" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
             </div>
             <textarea required rows={5} placeholder="Data Transmisi Pesan" className="cform-textarea" value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
             <button type="submit" className="cform-submit" disabled={status === "loading"}>
