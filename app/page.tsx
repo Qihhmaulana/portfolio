@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 import Navbar          from "@/components/Navbar";
@@ -31,16 +31,16 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const [sSnap, eSnap, pSnap, tSnap] = await Promise.all([
-          getDocs(query(collection(db, "skills"),      orderBy("order"))),
-          getDocs(query(collection(db, "experiences"), orderBy("order"))),
-          getDocs(query(collection(db, "projects"),    orderBy("order"))),
-          getDocs(query(collection(db, "tools"),       orderBy("order"))),
+          getDocs(collection(db, "skills")),
+          getDocs(collection(db, "experiences")),
+          getDocs(collection(db, "projects")),
+          getDocs(collection(db, "tools")),
         ]);
-        console.log("skills:", sSnap.size, "exp:", eSnap.size, "projects:", pSnap.size, "tools:", tSnap.size);
-        setSkills(sSnap.docs.map(d => (d.data() as { name: string }).name));
-        setExperiences(eSnap.docs.map(d => d.data() as Experience));
-        setProjects(pSnap.docs.map(d => d.data() as Project));
-        setTools(tSnap.docs.map(d => d.data() as Tool));
+        const byOrder = (a: { order: number }, b: { order: number }) => a.order - b.order;
+        setSkills(sSnap.docs.map(d => d.data() as { name: string; order: number }).sort(byOrder).map(d => d.name));
+        setExperiences(eSnap.docs.map(d => d.data() as Experience & { order: number }).sort(byOrder));
+        setProjects(pSnap.docs.map(d => d.data() as Project & { order: number }).sort(byOrder));
+        setTools(tSnap.docs.map(d => d.data() as Tool).sort(byOrder));
       } catch (err) {
         console.error("Firestore fetch failed:", err);
       }
