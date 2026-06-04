@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 
 type Project = {
   num: string; title: string; desc: string; tags: string[];
@@ -12,35 +13,36 @@ export default function ProjectsSection({ projects }: Props) {
   const [active, setActive] = useState<Project | null>(null);
 
   return (
-    <section className="section" id="projects">
-      <div className="section-header">
-        <span className="section-label">Projects</span>
-        <div className="section-rule" />
-      </div>
-      <div className="proj-list">
-        {projects.map((p) => (
-          <div key={p.num} className="proj-row" onClick={() => setActive(p)}>
-            <div className="proj-left">
-              <div className="proj-num mono">{p.num}</div>
-              <div>
-                <div className="proj-title">{p.title}</div>
-                <div className="proj-desc">{p.desc}</div>
+    <>
+      <section className="section" id="projects">
+        <div className="section-header">
+          <span className="section-label">Projects</span>
+          <div className="section-rule" />
+        </div>
+        <div className="proj-list">
+          {projects.map((p) => (
+            <div key={p.num} className="proj-row" onClick={() => setActive(p)}>
+              <div className="proj-left">
+                <div className="proj-num mono">{p.num}</div>
+                <div>
+                  <div className="proj-title">{p.title}</div>
+                  <div className="proj-desc">{p.desc}</div>
+                </div>
+              </div>
+              <div className="proj-right">
+                <div className="proj-tags">
+                  {p.tags.map((t) => (
+                    <div key={t} className="proj-tag-pill mono">{t}</div>
+                  ))}
+                </div>
+                <i className="ti ti-arrow-right proj-arrow" aria-hidden="true" />
               </div>
             </div>
-            <div className="proj-right">
-              <div className="proj-tags">
-                {p.tags.map((t) => (
-                  <div key={t} className="proj-tag-pill mono">{t}</div>
-                ))}
-              </div>
-              <i className="ti ti-arrow-right proj-arrow" aria-hidden="true" />
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
 
-      {/* Modal */}
-      {active && (
+      {active && createPortal(
         <div className="modal-overlay" onClick={() => setActive(null)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setActive(null)} aria-label="Close">
@@ -88,8 +90,9 @@ export default function ProjectsSection({ projects }: Props) {
               </a>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
-    </section>
+    </>
   );
 }
