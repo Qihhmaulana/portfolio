@@ -29,6 +29,7 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("projectId:", db.app.options.projectId);
       try {
         const [sSnap, eSnap, pSnap, tSnap] = await Promise.all([
           getDocs(collection(db, "skills")),
