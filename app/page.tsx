@@ -29,16 +29,20 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const [sSnap, eSnap, pSnap, tSnap] = await Promise.all([
-        getDocs(query(collection(db, "skills"),      orderBy("order"))),
-        getDocs(query(collection(db, "experiences"), orderBy("order"))),
-        getDocs(query(collection(db, "projects"),    orderBy("order"))),
-        getDocs(query(collection(db, "tools"),       orderBy("order"))),
-      ]);
-      setSkills(sSnap.docs.map(d => (d.data() as { name: string }).name));
-      setExperiences(eSnap.docs.map(d => d.data() as Experience));
-      setProjects(pSnap.docs.map(d => d.data() as Project));
-      setTools(tSnap.docs.map(d => d.data() as Tool));
+      try {
+        const [sSnap, eSnap, pSnap, tSnap] = await Promise.all([
+          getDocs(query(collection(db, "skills"),      orderBy("order"))),
+          getDocs(query(collection(db, "experiences"), orderBy("order"))),
+          getDocs(query(collection(db, "projects"),    orderBy("order"))),
+          getDocs(query(collection(db, "tools"),       orderBy("order"))),
+        ]);
+        setSkills(sSnap.docs.map(d => (d.data() as { name: string }).name));
+        setExperiences(eSnap.docs.map(d => d.data() as Experience));
+        setProjects(pSnap.docs.map(d => d.data() as Project));
+        setTools(tSnap.docs.map(d => d.data() as Tool));
+      } catch (err) {
+        console.error("Firestore fetch failed:", err);
+      }
     };
     fetchData();
   }, []);
