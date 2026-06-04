@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocsFromServer, orderBy, query } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 
 import Navbar          from "@/components/Navbar";
@@ -31,10 +31,10 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const [sSnap, eSnap, pSnap, tSnap] = await Promise.all([
-          getDocs(query(collection(db, "skills"),      orderBy("order"))),
-          getDocs(query(collection(db, "experiences"), orderBy("order"))),
-          getDocs(query(collection(db, "projects"),    orderBy("order"))),
-          getDocs(query(collection(db, "tools"),       orderBy("order"))),
+          getDocsFromServer(query(collection(db, "skills"),      orderBy("order"))),
+          getDocsFromServer(query(collection(db, "experiences"), orderBy("order"))),
+          getDocsFromServer(query(collection(db, "projects"),    orderBy("order"))),
+          getDocsFromServer(query(collection(db, "tools"),       orderBy("order"))),
         ]);
         console.log("skills:", sSnap.size, "exp:", eSnap.size, "projects:", pSnap.size, "tools:", tSnap.size);
         setSkills(sSnap.docs.map(d => (d.data() as { name: string }).name));
