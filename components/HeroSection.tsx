@@ -29,9 +29,7 @@ export default function HeroSection() {
         </div>
 
         <p className="hero-desc">
-          Membangun sistem yang andal dan antarmuka yang bersih.
-          Mahasiswa Computer Engineering di Bina Nusantara University
-          dengan pengalaman IT Support di PT Triputra Agro Persada Tbk.
+          My name is Maulana Faqih, I&apos;m a Final-year (8 semester) Computer Engineering student with 1 year of hands-on experience as an IT Support Infrastructure Intern at Triputra Agro Persada. Experienced in providing end-user technical support, troubleshooting hardware, software, and network issues, as well as managing IT Infrastructure and device deployment. Skilled in Microsoft 365 administration, network monitoring, and implementing security measures such as Multi-Factor Authentication (MFA). Strong problem-solving, adaptability, and communication skills, with a strong interest in IT Support and infrastructure roles.
         </p>
 
         <div className="hero-btns">
@@ -52,7 +50,7 @@ export default function HeroSection() {
         <div className="float-dot fd1" />
         <div className="float-dot fd2" />
         <div className="float-dot fd3" />
-        <div className="photo-badge mono">MF · 2025</div>
+        <div className="photo-badge mono">MF · 2026</div>
       </div>
     </section>
   );
